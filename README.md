@@ -6,6 +6,7 @@
  - sasso, carta, forbice --> https://www.practicepython.org/exercise/2014/03/26/08-rock-paper-scissors.html
  - non so il nome in italiano --> https://www.practicepython.org/exercise/2014/07/05/18-cows-and-bulls.html
 
+=======
  Creiamo dei branches per risolverle e poi uniamo
 
     def guess_the_number():  # crea la funzione
@@ -65,9 +66,21 @@
 
         print('\n\nGrazie per aver giocato!')  # messaggio di ringraziamento finale
 
+    prompt = '\t\t\t\t LIBRERIA DI GIOCHI'
 
-    guess_the_number()  # viene richiamata la funzione per farlo partire
+    prompt += '\n\nLe opzioni sono:'
+    prompt += '\nIndovina il numero --> Inserire 1'
+    prompt += '\nSasso, carta, forbice --> Inserire 2'
+    prompt += '\nBoh --> Inserire 3 \n\n--> '
+
+    scelta = int(input(prompt))
+
+    if scelta == 1:
+        guess_the_number()  # viene richiamata la funzione per farlo partire
     
-    
-    
-    
+    # if scelta == 2:
+        # paper_rock_scissors()
+
+    # if scelta == 3:
+        # boh()
+   
