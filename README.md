@@ -9,9 +9,60 @@
 =======
  Creiamo dei branches per risolverle e poi uniamo
 
-    def guess_the_number():  # crea la funzione
+    import random
+    
+    def sasso_carta_forbice():
 
-        import random  # importa la libreria per generare numeri a random
+    print('\nPAPER ROCK SCISSORS')
+
+    prompt = "\n\nCiao, giochiamo a sasso, carta, forbice! \nQuello che devi fare è immettere la tua scelta (sasso, carta, forbice), '"
+    prompt += "\nE il computer giochera contro di te\n Inserisci 'q' per abbandonare"
+    print(prompt)
+
+    user_count, computer_count = 0, 0
+    user_values = {'carta': 1, 'Carta': 1, 'sasso': 2, 'Sasso': 2, 'forbice': 3, 'Forbice': 3}
+    computer_values = {1: 'carta', 2: 'sasso', 3: 'forbice'}  # dizionario di corrispondenze
+
+    while True:
+
+        while True:
+
+            num = random.randint(1, 3)  # estrazione di ciò che gioca il computer
+            user = input('\n\nInserisci cosa giochi: ')
+
+            if user in user_values:  # riassenazione delle stringhe inserite dall'utente
+                user = user_values[user]
+            else:
+                print('Invalid syntax')
+                continue
+
+            print(f'Il computer gioca {computer_values[num]}')
+
+            if user == num:  # definizione dei punti
+                print("Pareggio!")
+            elif (user == 1 and num == 2) or (user == 2 and num == 3) or (user == 3 and num == 1):
+                print('Hai vinto una partita! + 1pt')
+                user_count += 1  # aumento del contatore per i punti del match
+            else:
+                print('Il computer ha vinto una partira! + 1pt per il computer!')
+                computer_count += 1
+
+            if computer_count == 3 or user_count == 3:  # se qualcuno è arrivato a tre si smette
+                break
+
+        if computer_count > user_count:  # display dei punti finali
+            choice = int(input(f"\n\nIl computer ha vinto {computer_count} a {user_count}. \nVuoi fare un'altra partita? Yes=0, No=1 --> "))
+
+        else:
+            choice = int(input(f"\n\nHai vinto {user_count} a {computer_count}. \nVuoi fare un'altra partita? Yes=0, No=1 --> "))
+
+        user_count, computer_count = 0, 0  # punti di nuovo a zero
+
+        if choice == 1:
+            break
+            
+            
+    def guess_the_number():  # crea la funzione
 
         prompt = '\n\n\t\t\t\tINDOVINA IL NUMERO'
         prompt += '\n\nDato un numero compreso fra 1 e 100 conosciuto solo dal computer, prova ad indovinarlo.'
@@ -19,15 +70,13 @@
         prompt += '\nti verrà dato un indizio sulla strada giusta.'
         prompt += '\n\nSe si desidera smettere inserire -1 '
         prompt += '\n\n\t\t\t\t\t\t\t\t\t\t\t Buona fortuna!'
-        print(prompt)  # crea il messaggio da stampare inizialmente (i print multilinea vengono sfasati ed è più leggibile)
+        print(prompt)  
 
         num = random.randint(0, 100)  # numero del computer, casuale
-        guess = -2  # variabile del giocatore inizializzata ad un numero che sarà sempre diverso da quello del computer
-        active = True  # serve per far andare avanti il ciclo while
         max_numbers, min_numbers = [], []  # liste in cui verranno inseriti i numeri sbagliati già inseriti
         max_number, min_number = -1, -1  # numeri fra cui il valore è compreso inizializzati a valori sempre diversi da quelli possibili
 
-        while active:
+        while True:
 
             guess = int(input('Inserire il numero. --> '))  # l'utente inserisce il valore e la variabile assume significato
 
@@ -63,8 +112,7 @@
                 print(f'il numero è minore di {max_number}')  # viene stampato un indizio che comprede solo una variabile
             elif min_number >= 0:
                 print(f'il numero è maggiore di {min_number}')
-
-        print('\n\nGrazie per aver giocato!')  # messaggio di ringraziamento finale
+                
 
     prompt = '\t\t\t\t LIBRERIA DI GIOCHI'
 
@@ -78,9 +126,11 @@
     if scelta == 1:
         guess_the_number()  # viene richiamata la funzione per farlo partire
     
-    # if scelta == 2:
-        # paper_rock_scissors()
+    if scelta == 2:
+        sasso_carta_forbice()
 
     # if scelta == 3:
         # boh()
+        
+    print('\n\nGrazie per aver giocato!')  # messaggio di ringraziamento finale
    
