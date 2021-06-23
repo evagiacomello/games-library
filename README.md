@@ -13,53 +13,52 @@
     
     def sasso_carta_forbice():
 
-    print('\nPAPER ROCK SCISSORS')
+        print('\nPAPER ROCK SCISSORS')
 
-    prompt = "\n\nCiao, giochiamo a sasso, carta, forbice! \nQuello che devi fare è immettere la tua scelta (sasso, carta, forbice), '"
-    prompt += "\nE il computer giochera contro di te\n Inserisci 'q' per abbandonare"
-    print(prompt)
+        prompt = "\n\nCiao, giochiamo a sasso, carta, forbice! \nQuello che devi fare è immettere la tua scelta (sasso, carta, forbice), '"
+        prompt += "\nE il computer giochera contro di te\n Inserisci 'q' per abbandonare"
+        print(prompt)
 
-    user_count, computer_count = 0, 0
-    user_values = {'carta': 1, 'Carta': 1, 'sasso': 2, 'Sasso': 2, 'forbice': 3, 'Forbice': 3}
-    computer_values = {1: 'carta', 2: 'sasso', 3: 'forbice'}  # dizionario di corrispondenze
-
-    while True:
+        user_count, computer_count = 0, 0
+        user_values = {'carta': 1, 'Carta': 1, 'sasso': 2, 'Sasso': 2, 'forbice': 3, 'Forbice': 3}
+        computer_values = {1: 'carta', 2: 'sasso', 3: 'forbice'}  # dizionario di corrispondenze
 
         while True:
 
-            num = random.randint(1, 3)  # estrazione di ciò che gioca il computer
-            user = input('\n\nInserisci cosa giochi: ')
+            while True:
 
-            if user in user_values:  # riassenazione delle stringhe inserite dall'utente
-                user = user_values[user]
+                num = random.randint(1, 3)  # estrazione di ciò che gioca il computer
+                user = input('\n\nInserisci cosa giochi: ')
+
+                if user in user_values:  # riassenazione delle stringhe inserite dall'utente
+                    user = user_values[user]
+                else:
+                    print('Invalid syntax')
+                    continue
+
+                print(f'Il computer gioca {computer_values[num]}')
+
+                if user == num:  # definizione dei punti
+                    print("Pareggio!")
+                elif (user == 1 and num == 2) or (user == 2 and num == 3) or (user == 3 and num == 1):
+                    print('Hai vinto una partita! + 1pt')
+                    user_count += 1  # aumento del contatore per i punti del match
+                else:
+                    print('Il computer ha vinto una partira! + 1pt per il computer!')
+                    computer_count += 1
+
+                if computer_count == 3 or user_count == 3:  # se qualcuno è arrivato a tre si smette
+                    break
+
+            if computer_count > user_count:  # display dei punti finali
+                choice = int(input(f"\n\nIl computer ha vinto {computer_count} a {user_count}. \nVuoi fare un'altra partita? Yes=0, No=1 --> "))
             else:
-                print('Invalid syntax')
-                continue
+                choice = int(input(f"\n\nHai vinto {user_count} a {computer_count}. \nVuoi fare un'altra partita? Yes=0, No=1 --> "))
 
-            print(f'Il computer gioca {computer_values[num]}')
+            user_count, computer_count = 0, 0  # punti di nuovo a zero
 
-            if user == num:  # definizione dei punti
-                print("Pareggio!")
-            elif (user == 1 and num == 2) or (user == 2 and num == 3) or (user == 3 and num == 1):
-                print('Hai vinto una partita! + 1pt')
-                user_count += 1  # aumento del contatore per i punti del match
-            else:
-                print('Il computer ha vinto una partira! + 1pt per il computer!')
-                computer_count += 1
-
-            if computer_count == 3 or user_count == 3:  # se qualcuno è arrivato a tre si smette
+            if choice == 1:
                 break
-
-        if computer_count > user_count:  # display dei punti finali
-            choice = int(input(f"\n\nIl computer ha vinto {computer_count} a {user_count}. \nVuoi fare un'altra partita? Yes=0, No=1 --> "))
-
-        else:
-            choice = int(input(f"\n\nHai vinto {user_count} a {computer_count}. \nVuoi fare un'altra partita? Yes=0, No=1 --> "))
-
-        user_count, computer_count = 0, 0  # punti di nuovo a zero
-
-        if choice == 1:
-            break
             
             
     def guess_the_number():  # crea la funzione
