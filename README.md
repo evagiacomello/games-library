@@ -112,13 +112,129 @@
             elif min_number >= 0:
                 print(f'il numero è maggiore di {min_number}')
                 
+    import random
+
+
+    def hangman():
+
+        words = ['giraffa', 'cristallo', 'spinacio', 'colesterolo', 'melissa',
+                 'frastagliate', 'barbabietola', 'navata', 'cruciforme', 'impollinare',
+                 'lampone', 'ramen', 'cicala', 'corallo', 'misandria', 'orbitale',
+                 'florida', 'surf', 'palma', 'bracciale', 'limone', 'singulto', 'epifania',
+                 'globo', 'tiramisu', 'gradenia', 'fresia', 'indentazione', 'calamaro', 'mosaico',
+                 'fucile', 'ceralacca', 'murena', 'olimpo', 'cornamusa', 'rosario',
+                 'spremiagrumi', 'ninfea', 'metropolitana', 'lampione', 'etnia', 'culturale',
+                 'participio', 'principato', 'ritornello', 'alambicco', 'riscatto', 'giglio',
+                 'calabrone', 'grappolo', 'sapone', 'cincischiare', 'sagra', 'girino']
+
+        word = random.choice(words)
+
+        length = len(word)
+
+        new_word = ''  # la parola finale
+        new_word_letters = []  # lettere della parola finale dell'utente
+        letters_said = []  # lettere dette dall'utente
+        choice = None
+        count, count2 = 0, 0
+
+        prompts = ['''\n
+        \t\t\t  |────────|
+        la lettera\t  |\t\t |
+        non è\t\t  |\t\t 
+        nella parola  |\t\t
+        \t\t\t  |\t\t''',
+                   '''\n
+        \t\t\t  |────────|
+        la lettera\t  |\t\t |
+        non è\t\t  |\t\t 
+        nella parola  |\t\t
+        \t\t\t  |\t\t| ''',
+                   '''\n
+        \t\t\t  |────────|
+        la lettera\t  |\t\t |
+        non è\t\t  |\t\t 
+        nella parola  |\t\t
+        \t\t\t  |\t\t| |''',
+                   '''\n
+        \t\t\t  |────────|
+        la lettera\t  |\t\t |
+        non è\t\t  |\t\t 
+        nella parola  |\t\t |
+        \t\t\t  |\t\t| |''',
+                   '''\n
+        \t\t\t  |────────|
+        la lettera\t  |\t\t |
+        non è\t\t  |\t\t 
+        nella parola  |\t\t-|
+        \t\t\t  |\t\t| |''',
+                   '''\n
+        \t\t\t  |────────|
+        la lettera\t  |\t\t |
+        non è\t\t  |\t\t 
+        nella parola  |\t\t-|-
+        \t\t\t  |\t\t| |''',
+                   '''\n
+        \t\t\t  |────────|
+        la lettera\t  |\t\t |
+        non è\t\t  |\t\t ◯\t\t\t\t g a m e   o v e r 
+        nella parola  |\t\t-|-
+        \t\t\t  |\t\t| |''']
+
+        for i in range(length):
+
+            new_word_letters.append('_')
+
+        print(f'\n\nla parola è lunga {length} lettere:     ' + '_'*length)
+
+        while count != length:
+
+            if count2 == 7:
+                print(f'la parola era {word}!')
+                break
+
+            current_value = input('\nInserire una lettera: ')
+
+            if current_value == 'exit':
+                break
+
+            elif current_value in letters_said:
+                print('La lettera è già stata detta')
+                continue
+
+            else:
+
+                for x in range(length):
+
+                    if new_word_letters[x] == '_':  # se il posto nella lista non è un '_':
+
+                        if current_value == word[x]:  # se la lettera dell'utente è uguale a quella della parola
+                            new_word_letters[x] = current_value  # viene aggiunta alla lista delle lettere della parola che verrà indovinata
+                            choice = 1
+                            count += 1
+                    new_word += new_word_letters[x]
+
+            letters_said.append(current_value)
+
+            if choice != 1:
+                print(prompts[count2])
+                count2 += 1
+            else:
+                print(f'La parola è: {new_word}')
+                choice = None
+
+            new_word = ''
+
+        if count == length:
+            print('Hai indovinato!')
+                
 
     prompt = '\t\t\t\t LIBRERIA DI GIOCHI'
 
     prompt += '\n\nLe opzioni sono:'
     prompt += '\nIndovina il numero --> Inserire 1'
     prompt += '\nSasso, carta, forbice --> Inserire 2'
-    prompt += '\nBoh --> Inserire 3 \n\n--> '
+    prompt += '\nBoh --> Inserire 3'
+    prompt += '\nImpiccato --> Inserire 4 \n\n--> '
 
     scelta = int(input(prompt))
 
@@ -130,6 +246,9 @@
 
     # if scelta == 3:
         # boh()
+        
+    if scelta == 4:
+        hangman()
         
     print('\n\nGrazie per aver giocato!')  # messaggio di ringraziamento finale
    
